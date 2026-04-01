@@ -1,0 +1,23 @@
+<h2>Vendor Panel</h2>
+<button onclick="goLive()">Go Live</button>
+
+<script>
+function goLive() {
+  navigator.geolocation.watchPosition(async (pos) => {
+    const lat = pos.coords.latitude;
+    const lng = pos.coords.longitude;
+
+    await fetch("https://your-backend.onrender.com/update", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: "Pizza Truck",
+        lat,
+        lng
+      })
+    });
+
+    console.log("Location sent");
+  });
+}
+</script>
